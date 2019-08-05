@@ -1,20 +1,35 @@
-const request = require('request');
+
 const geocode = require('./utils/geocode');
 const forcast = require('./utils/forcast'); 
 
 
-
+const address = process.argv[2];
    
+if(!address){
+        console.log("please provide an address")
+}else{
+        geocode(address,(error,{latitude,longitude,location})=>{
+                if(error){
+                        return console.log(error)
+                }
+                
+                
+                
+                forcast(latitude,longitude,(error,data)=>{
+                        if(error){
+                                return console.log(error)
+                        }
+                        console.log("Location : ",location);         
+                        console.log("Data : ",data);
+                        
+                })
+        })
+}
+
 //location
-geocode('New York',(error,data)=>{
-        console.log("Error : ",error);
-        console.log("Data : ",data);
-})
-//Weather
-forcast(-75.7088,44.1545,(error,data)=>{
-        console.log("Error : ",error);
-        console.log("Data : ",data);
-})
+
+
+
 
 
 
