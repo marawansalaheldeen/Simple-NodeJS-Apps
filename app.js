@@ -1,6 +1,11 @@
-
+const express = require('express');
 const geocode = require('./utils/geocode');
 const forcast = require('./utils/forcast'); 
+const control = require('./controller/controller');
+
+const app =  express();
+app.set('view engine','ejs');
+
 
 
 const address = process.argv[2];
@@ -26,9 +31,12 @@ if(!address){
         })
 }
 
-//location
 
 
+const port = 3000;
+app.listen(port,()=>{
+        console.log(`server listening on port ${port}`);
+})
 
 
 
