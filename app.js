@@ -2,10 +2,25 @@ const express = require('express');
 const geocode = require('./utils/geocode');
 const forcast = require('./utils/forcast'); 
 const control = require('./controller/controller');
+const ejs = require('ejs');
+const path    = require('path')
 
 const app =  express();
-app.set('view engine','ejs');
 
+
+const publicDirectoryPath = path.join(__dirname,'./public')
+const viewsPath = path.join(__dirname, './templates/views')
+const partialsPath = path.join(__dirname, '/templates/partials')
+
+// Setup handlebars engine and views location
+app.set('view engine','ejs');
+app.set('views', viewsPath)
+
+
+// Setup static directory to serve
+app.use(express.static(publicDirectoryPath))
+
+app.use('http://localhost:3000/',express.static(__dirname + '/public'));
 
 
 const address = process.argv[2];
@@ -32,7 +47,7 @@ if(!address){
 }
 
 
-
+const e = control(app)
 const port = 3000;
 app.listen(port,()=>{
         console.log(`server listening on port ${port}`);

@@ -7,7 +7,7 @@ const geocode = (address,callback)=>{
             if(error){
                     callback('unable to connect to the service')
             }else if(response.body.features.length === 0){
-                    console.log("wrong location");
+                    callback("wrong location");
             }else{
                     callback(undefined,{
                             longitude:response.body.features[0].center[0],
