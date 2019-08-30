@@ -11,7 +11,7 @@ const app =  express();
 const publicDirectoryPath = path.join(__dirname,'./public')
 const viewsPath = path.join(__dirname, './templates/views')
 const partialsPath = path.join(__dirname, '/templates/partials')
-
+const port = process.env.PORT || 3000;
 // Setup handlebars engine and views location
 app.set('view engine','ejs');
 app.set('views', viewsPath)
@@ -48,7 +48,6 @@ if(!address){
 
 
 const e = control(app)
-const port = 3000;
 app.listen(port,()=>{
         console.log(`server listening on port ${port}`);
 })
